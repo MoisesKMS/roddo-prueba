@@ -115,3 +115,63 @@ export const createPropiedad = async (req, res) => {
         })
     }
 }
+
+export const updatePropiedad = async (req, res) => {
+
+    /* Tratamos de actualizar la propiedad */
+    try {
+        const id = req.params.id // <- obtenemos el id de la propiedad a actualizar
+
+        // extraemos los valores de la solicitud
+        const {
+            Description,
+            Field,
+            Construction,
+            Address,
+            ContactPhone,
+            ContactMail,
+            Bathrooms,
+            Bedrooms,
+            Parkinglots
+        } = req.body
+
+        // intetamos hacer la insercion en sql y guardamos el resultado en 'result'
+        const [result] = await pool.query(
+            `UPDATE real_state_list SET
+         Description = IFNULL(?, Description),
+         Field = IFNULL(?, Field),
+         Construction = IFNULL(?, Construction),
+         Address = IFNULL(?, Address),
+         ContactPhone = IFNULL(?, ContactPhone),
+         ContactMail = IFNULL(?, ContactMail),
+         Bathrooms = IFNULL(?, Bathrooms),
+         Bedrooms = IFNULL(?, Bedrooms),
+         Parkinglots = IFNULL(?, Parkinglots) WHERE ID = ?`,
+            [Description, Field, Construction, Address, ContactPhone, ContactMail, Bathrooms, Bedrooms, Parkinglots, id])
+
+        /**
+         * Comprobamos si hubo filas affectadas (si las hubo es indicativo de que el registro cambio).
+         * En caso de no tener filas afectadas devolvemos un json con un status 404, siendo que el error comun
+         * sera que no se encontro una propiedad para hacer cambios
+         */
+        if (result.affectedRows == 0) {
+            return res.status(404).json({
+                message: 'No se encontró la propiedad'
+            })
+        }
+
+        // volvemos a hacer una consulta a slq para traernos la propiedad recien actualizada
+        const [rows] = await pool.query('SELECT * FROM real_state_list WHERE ID = ?', [id])
+
+        // como siempre devuleve un array con la propiedad, esta lo guaradmos en propiedad
+        const propiedad = rows[0]
+        delete propiedad.DeletedDate
+
+        res.json(propiedad) // <- devolvemos la propiedad actualizada
+
+    } catch (error) {
+        return res.status(500).json({
+            message: 'No se pudo procesar la solicitud'
+        })
+    }
+}

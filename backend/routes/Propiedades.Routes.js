@@ -3,7 +3,8 @@ import checkAuth from "../middleware/authMiddleware.js";
 import {
     getPropiedades,
     getPropiedad,
-    createPropiedad
+    createPropiedad,
+    updatePropiedad
 } from "../controllers/Propiedades.Controller.js";
 
 const router = Router()
@@ -13,6 +14,7 @@ const router = Router()
 router.route('/propiedades').get(checkAuth, getPropiedades)
 router.route('/propiedades/:id').get(checkAuth, getPropiedad)
 router.route('/propiedades').post(checkAuth, createPropiedad)
+router.route('/propiedades/:id').put(checkAuth, updatePropiedad)
 
 
 export default router
