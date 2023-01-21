@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv";
 import cors from "cors";
 import userRoutes from "./routes/User.Routes.js";
+import propiedadesRoutes from "./routes/Propiedades.Routes.js";
 
 
 const app = express() // traesmos express
@@ -33,6 +34,7 @@ app.use(cors({
  * EndPoints de la API
  */
 app.use('/api', userRoutes) // ruta master para la api de usarios
+app.use('/api', propiedadesRoutes) // ruta master para la api de propiedades
 
 // En caso de no tener un EndPoint calido devolver un 404
 app.use((req, res, next) => {
