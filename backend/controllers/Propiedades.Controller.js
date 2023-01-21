@@ -61,3 +61,57 @@ export const getPropiedad = async (req, res) => {
     }
 
 }
+
+export const createPropiedad = async (req, res) => {
+
+    /* Tratamos de crear una propiedad */
+    try {
+        // extraemos los valores del body
+        const {
+            Description,
+            Field,
+            Construction,
+            Address,
+            ContactPhone,
+            ContactMail,
+            Bathrooms,
+            Bedrooms,
+            Parkinglots
+        } = req.body
+
+        /**
+         * Tratamos de insertar los valores, despues guardamos el resultado
+         */
+        const [rows] = await pool.query(`
+        INSERT INTO real_state_list (
+            Description,
+            Field,
+            Construction,
+            Address,
+            ContactPhone,
+            ContactMail,
+            Bathrooms,
+            Bedrooms,
+            Parkinglots
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [Description, Field, Construction, Address, ContactPhone, ContactMail, Bathrooms, Bedrooms, Parkinglots])
+
+        // devolvemos un objeto json con los datos almasenados y el id guardado 
+        res.send({
+            id: rows.insertId,
+            Description,
+            Field,
+            Construction,
+            Address,
+            ContactPhone,
+            ContactMail,
+            Bathrooms,
+            Bedrooms,
+            Parkinglots
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: 'No se pudo procesar la solicitud'
+        })
+    }
+}
