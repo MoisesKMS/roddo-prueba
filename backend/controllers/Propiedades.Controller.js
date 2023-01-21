@@ -175,3 +175,40 @@ export const updatePropiedad = async (req, res) => {
         })
     }
 }
+
+export const deletePropiedad = async (req, res) => {
+    /* Intentamos 'eliminar' una propiedad */
+    try {
+        const id = req.params.id // <- obtenemos el id de la propiedad a eliminar
+
+        /**
+         * Este apartado es importante, ya que hay dos posibilidades para ejecutar
+         * La primera: Eliminar el registro definitivamente de la base de datos
+         * La segunda: No eliminar el registro, pero si marcarlo como 'eliminado' en la base de datos
+        */
+
+        // Para el primer caso ejecurar el siguiente codigo
+        // const [result] = await pool.query('DELETE FROM real_state_list WHERE ID = ?', [id])
+
+        // Para el segundo caso ejecutar el siguiente codigo
+        //Este query solo crea una marca de tiempo en el registro para saber que fue 'Eliminada', pero no lo borra de la base de datos
+        const [result] = await pool.query('UPDATE real_state_list SET DeletedDate = CURRENT_TIMESTAMP WHERE ID = ?', [id])
+
+        /**
+         * Comprobamos si hubo filas affectadas (si las hubo es indicativo de que el registro cambio).
+         * En caso de no tener filas afectadas devolvemos un json con un status 404, siendo que el error comun
+         * sera que no se encontro una propiedad para hacer cambios
+         */
+        if (result.affectedRows == 0) return res.status(404).json({
+            message: 'No se encontró la propiedad'
+        })
+
+        // en caso de que todo fue bien, devolvemos un status 204 (Solicitud exitosa pero no devolvemos contenido)
+        res.sendStatus(204)
+
+    } catch (error) {
+        return res.status(500).json({
+            message: 'No se pudo procesar la solicitud'
+        })
+    }
+}
