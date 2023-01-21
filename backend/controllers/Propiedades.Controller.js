@@ -8,7 +8,7 @@ export const getPropiedades = async (req, res) => {
      * Ya que si la tiene, es indicativo de que la propiedad fue eliminada
      */
     try {
-        const [rows] = await pool.query('SELECT * FROM real_state_list WHERE DeletedDate IS NULL') // <- consulta a sql
+        const [rows] = await pool.query('SELECT * FROM real_state_list WHERE DeletedDate IS NULL ORDER BY ID DESC') // <- consulta a sql
 
         const propiedades = rows // <- guardamos todos los registros
 
