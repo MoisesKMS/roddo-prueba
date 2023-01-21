@@ -1,0 +1,352 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
+
+#root {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  color: #000000;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+a {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: #000000;
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+.btn {
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding: 1.3rem 2rem;
+  border-radius: 2rem;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  -webkit-transition: color 200ms, background-color 200ms, box-shadow 200ms;
+  transition: color 200ms, background-color 200ms, box-shadow 200ms;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.btn__rosa {
+  background-color: #ea3473;
+  color: #ffffff;
+}
+
+.btn__rosa:hover {
+  background-color: #e81d63;
+}
+
+.btn__rojo {
+  background-color: gray;
+  color: #ffffff;
+}
+
+.btn__rojo:hover {
+  background-color: black;
+}
+
+.container {
+  width: 95%;
+  margin: 0 auto;
+  max-width: 112rem;
+}
+
+.login {
+  background-color: #F4F4F4;
+  width: 100%;
+  height: 100vh;
+}
+
+.login__grid {
+  display: grid;
+  gap: 5rem;
+  padding-top: 10rem;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .login__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.login__title {
+  font-weight: 900;
+  margin: 0;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+@media (min-width: 1200px) {
+  .login__title {
+    font-size: 5rem;
+  }
+}
+
+.login__title span {
+  color: #ea3473;
+}
+
+.l-form {
+  background-color: #ffffff;
+  padding: 3rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.l-form__field {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+}
+
+.l-form__label {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #7D7D7D;
+}
+
+.l-form__input {
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  outline: none;
+  border: 1px solid #AFAFAF;
+  font-size: 1.6rem;
+  font-weight: 500;
+  -webkit-transition: border 200ms ease-in-out;
+  transition: border 200ms ease-in-out;
+}
+
+.l-form__input:focus {
+  border: 1px solid #ea3473;
+}
+
+.l-form__submit {
+  all: unset;
+  background-color: #ea3473;
+  padding: 1.2rem 2rem;
+  border-radius: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #ffffff;
+  cursor: pointer;
+  -webkit-transition: background-color 200ms ease-in-out;
+  transition: background-color 200ms ease-in-out;
+}
+
+.l-form__submit:hover {
+  background-color: #d51658;
+}
+
+.dashboard__header {
+  max-width: 140rem;
+  margin: 5rem auto 3rem auto;
+  text-align: center;
+}
+
+.dashboard__title span {
+  color: #ea3473;
+}
+
+.dashboard__buttons {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+}
+
+.form {
+  margin: 0 auto;
+  border: 1px solid #F4F4F4;
+  border-radius: 1.5rem;
+  padding: 3rem;
+  max-width: 70rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.form__field {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  gap: 2rem;
+}
+
+.form__label {
+  font-size: 1.8rem;
+}
+
+.form__input {
+  padding: 0.5rem;
+  max-width: 40rem;
+  width: 100%;
+  outline: none;
+  border: 1px solid #000000;
+  padding: 1rem;
+  font-weight: 500;
+  -webkit-transition: border 200ms ease-in-out;
+  transition: border 200ms ease-in-out;
+}
+
+.form__input:focus {
+  border: 1px solid #ea3473;
+}
+
+.form__button {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+.table__thead {
+  background-color: #ea3473;
+  color: #ffffff;
+}
+
+.table__th {
+  padding: 1rem;
+  text-align: center;
+}
+
+.table__tr {
+  -webkit-transition: background-color 200ms ease-in-out;
+  transition: background-color 200ms ease-in-out;
+}
+
+.table__tr:nth-child(even) {
+  background-color: #F4F4F4;
+}
+
+.table__tr:hover {
+  background-color: #EDFBFF;
+}
+
+.table__td,
+.table__td--acciones {
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+.table__td--acciones {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  gap: 2rem;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.table__accion {
+  all: unset;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.table__accion--editar {
+  color: #EE7C10;
+}
+
+.table__accion--eliminar {
+  color: rgb(169, 0, 0);
+}
+
+.alerta {
+  position: fixed;
+  top: 3rem;
+  right: 3rem;
+  padding: 2rem;
+  z-index: 10000;
+  font-size: 1.8rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  border-radius: 1.5rem;
+}
+
+.alerta.exito {
+  background-color: green;
+  color: #ffffff;
+}
+
+.alerta.error {
+  background-color: red;
+  color: #ffffff;
+}
