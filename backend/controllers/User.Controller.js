@@ -31,12 +31,28 @@ export const login = async (req, res) => {
         // si el usario existe, no esta marcado como eliminado y la contraseña coincide con la del req.body
         // autenticamos al usuario dandole un token firmado.
         res.json({
-            id: usuario.Id,
-            user: usuario.Username,
+            Id: usuario.Id,
+            Username: usuario.Username,
             token: generarJWT(usuario.Id)
         })
     } catch (error) {
         const err = new Error('No se pudo procesar tu solicitud, revisa que todo este en orden e intenta de nuevo')
         return res.status(400).json({ message: err.message });
     }
+}
+
+export const perfil = (req, res) => {
+    const { usuario } = req;
+
+    // como siempre devuleve un array con un array dentro (el que contiene al usuario), este lo devolvemos como usuario[0][0]
+    /**
+     *  [
+     *      [
+     *          {
+     *              datos...
+     *          }
+     *      ]
+     *  ]
+     */
+    res.send(usuario[0][0]);
 }
