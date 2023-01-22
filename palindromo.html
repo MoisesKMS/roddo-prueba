@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprobar si una cadena es palindrome</title>
+</head>
+
+<body>
+    <style>
+        .app {
+            max-width: 500px;
+            margin: 100px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+
+    <main class="app">
+        <form action id="form">
+            <input id="textInput" type="text" id="cadena" placeholder="Ingresa una Frase">
+            <input type="submit" value="comprobar">
+        </form>
+
+        <p id="resultado"></p>
+    </main>
+
+
+    <script>
+        // obtenemos los elementos que vamos a ocupar
+        const formulario = document.querySelector('#form')
+        const resultado = document.querySelector('#resultado')
+        const fraseInput = document.querySelector('#textInput')
+
+        // agregamos la funcionalidad
+        formulario.addEventListener('submit', (e) => {
+            e.preventDefault() // <- evitamos que se haga una peticion con el formulario
+            const frase = fraseInput.value.trim()
+            // comprobamos que el input no este vacio
+            if (frase == '') {
+                resultado.textContent = 'Ingresa una Frase'
+                return
+            }
+
+            const expresionRegular = /[^A-Za-z0-9]/g // <- expresion para obtener solo letras y numeros
+
+            // transformamos la cadena a minisculas y eliminamos cualquier careacter que no este en la expresion
+            const fraseLower = frase.toLowerCase().replace(expresionRegular, '')
+
+            /*
+            * Separamos todos los caracteres de la frase y los guardamos en un arreglo
+            * Invertimos el orden del arreglo ['a','b','c'] => ['c','b','a']
+            * Juntamos todos los caracteres de nuevo ['c','b','a'] => 'cba'
+            */
+            const fraseReverse = fraseLower.split('').reverse().join('')
+
+
+            // revisamos si 'fraseLower' con la funcion reverse() es igual a 'fraseReverse': 'cba' == 'cba'
+            if (fraseLower == fraseReverse) {
+                resultado.textContent = 'La frase ingresada es un palindromo'
+            } else {
+                resultado.textContent = 'La frase ingresada NO es un palindromo'
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>
