@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validar un numero de Télefono</title>
+</head>
+
+<body>
+    <style>
+        .app {
+            max-width: 500px;
+            margin: 100px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+
+    <main class="app">
+        <form action id="form">
+            <input id="textInput" type="text" id="cadena" placeholder="Ingresa un numero de telefono">
+            <input type="submit" value="comprobar">
+        </form>
+
+        <p id="resultado"></p>
+    </main>
+
+
+    <script>
+        // obtenemos los elementos que vamos a ocupar
+        const formulario = document.querySelector('#form')
+        const resultado = document.querySelector('#resultado')
+        const numeroInput = document.querySelector('#textInput')
+
+
+
+        // agregamos la funcionalidad
+        formulario.addEventListener('submit', (e) => {
+            e.preventDefault() // <- evitamos que se haga una peticion con el formulario
+
+            let numero = numeroInput.value.trim() // <- obtenemos el numero y eliminamos posibles espacios en blanco
+
+            function codigoInternacional(codigo) {
+                // separamos el contenido de numero dependiendo de si es +52 o 52
+                numero = numero.split(codigo)[1]
+                numero = numero.split('') // convertimos de string a array
+
+                // comprobamos que solo tenga 10 caracteres, ni mas ni menos
+                if (numero.length !== 10) {
+                    resultado.textContent = 'ERROR'
+                    return
+                }
+
+            }
+
+            // comprobamos que sea un numero y no contenca letras o otros caracteres
+            function combrobarNumero() {
+
+                // guardamos el arreglo de numero en numeroTemporal como un string
+                const numeroTemporal = Number(numero.join(''))
+
+                // comprobamos que numeroTemporal sea un numero
+                // comprobamos que numero solo tenga 10 caracteres, ni mas ni menos
+                if (!numeroTemporal || numero.length != 10) {
+                    resultado.textContent = 'ERROR'
+                    return
+                }
+
+                // en caso de que todo vaya bien
+                resultado.textContent = 'OK'
+
+            }
+
+            // comprobamos que el input no este vacio
+            if (numero == '') {
+                resultado.textContent = 'Ingresa un Numero de Telefono'
+                return
+            }
+
+            // comprobamos si el numero empieza por +52
+            if (numero.startsWith('+52')) {
+                codigoInternacional('+52')
+                combrobarNumero()
+                return
+            }
+
+            // comprobamos si el numero empieza por 52
+            if (numero.startsWith('52')) {
+                codigoInternacional('52')
+                combrobarNumero()
+                return
+            }
+
+            // en caso de que no inicie ni con 52 o +52 comprobamos que sea un numero valido (10 digitos)
+            numero = numero.split('') // <- convertimos el string a arreglo
+            combrobarNumero() // <- comprobamos el numero
+
+        })
+
+    </script>
+</body>
+
+</html>
